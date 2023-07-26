@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="_csrf" content="{{ csrfToken }}" />
+    <meta name="base_url" content="{{ env('BASEURL') }}" />
+    <title>{{ title }}</title>
+    <link href="{{ env('BASEURL') }}fontawesome/css/all.min.css" rel="stylesheet">
+    <link href="{{ env('BASEURL') }}css/app.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ env('BASEURL') }}css/datatables.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    @!section('css')
+</head>
+
+<body>
+    <div class="wrapper">
+        @include('webAdmin/layouts/sidebar')
+
+        <div class="main">
+            @include('webAdmin/layouts/navbar')
+
+            @!section('content')
+
+            @include('webAdmin/layouts/footer')
+        </div>
+    </div>
+    <script src="{{ env('BASEURL') }}js/app.js"></script>
+    <script src="{{ env('BASEURL') }}js/jquery.min.js"></script>
+    <script src="{{ env('BASEURL') }}js/datatables.min.js"></script>
+    <script src="{{ env('BASEURL') }}js/sweetalert2.min.js"></script>
+    <script src="{{ env('BASEURL') }}js/application.js"></script>
+    @!section('js')
+</body>
+
+</html>

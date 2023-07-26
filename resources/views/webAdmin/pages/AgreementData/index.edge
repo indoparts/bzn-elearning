@@ -1,0 +1,54 @@
+@layout('webAdmin/layouts/mainApps')
+@set('title', 'Syarat & Ketentuan')
+@section('css')
+@end
+@section('content')
+<main class="content">
+    <div class="container-fluid p-0">
+        <h1 class="h3 mb-3">Kelola Syarat & Ketentuan</h1>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="d-flex justify-content-between">
+                            <h5 class="card-title mb-0">Data Syarat & Ketentuan</h5>
+                            <button link="{{ route('web/AgreementDataController.create') }}" type-act="create"
+                                class="btn btn-primary btn-action" type-request="get">Tambah Syarat & Ketentuan</button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        @if(flashMessages.has('notification'))
+                        <div class="alert alert-success" role="alert">
+                            {{ flashMessages.get('notification') }}
+                        </div>
+                        @end
+                        <div class="table-responsive">
+                            <table id="example" class="table table-hover my-0"
+                                url="{{ route('web/AgreementDataController.index') }}" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th>Judul</th>
+                                        <th>Status</th>
+                                        <th width="17%">#</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>Judul</th>
+                                        <th>Status</th>
+                                        <th width="17%">#</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+@end
+@section('js')
+<script src="{{ env('BASEURL') }}jspage/agreement_data.js"></script>
+@end

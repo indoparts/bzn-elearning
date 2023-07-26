@@ -1,0 +1,67 @@
+@layout('webAdmin/layouts/mainApps')
+@set('title', 'Materi Karir')
+@section('css')
+<link rel="stylesheet" href="{{ env('BASEURL') }}css/datepicker.css">
+@end
+@section('content')
+<main class="content">
+    <div class="container-fluid p-0">
+        <h1 class="h3 mb-3">Kelola Materi Karir</h1>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col text-start">
+                                <h5 class="card-title mb-0">Data Materi Karir</h5>
+                            </div>
+                            <div class="col text-center">
+                                <div class="input-group">
+                                    <input type="text" class="form-control datepicker datepicker1"
+                                        placeholder="filter mulai">
+                                    <span class="input-group-text" id="basic-addon1">sampai dengan</span>
+                                    <input type="text" class="form-control datepicker datepicker2"
+                                        placeholder="filter selesai">
+                                </div>
+                            </div>
+                            <div class="col text-end">
+                                <a href="{{ route('web/CareerMaterialsController.create') }}" type-act="create"
+                                    class="btn btn-primary btn-action" type-request="get">Tambah Materi Karir</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        @if(flashMessages.has('notification'))
+                        <div class="alert alert-success" role="alert">
+                            {{ flashMessages.get('notification') }}
+                        </div>
+                        @end
+                        <div class="table-responsive">
+                            <table class="table table-striped nowrap table-hover" style="width:100%" id="example"
+                                url-data="{{ route('web/CareerMaterialsController.index') }}">
+                                <thead>
+                                    <tr>
+                                        <th>Jutul</th>
+                                        <th>Sub Kategori</th>
+                                        <th>Pembuat</th>
+                                        <th>tags</th>
+                                        <th>waktu dibuat</th>
+                                        <th>waktu diperbaharui</th>
+                                        <th width="10%">#</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+@end
+@section('js')
+<script src="{{ env('BASEURL') }}js/moment.js"></script>
+<script src="{{ env('BASEURL') }}js/datepicker.js"></script>
+<script src="{{ env('BASEURL') }}jspage/career-materials.js"></script>
+@end

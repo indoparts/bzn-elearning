@@ -1,0 +1,96 @@
+@layout('webAdmin/layouts/mainApps')
+@set('title', 'Tambah Materi Karir')
+@section('css')
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+<link rel="stylesheet" href="{{ env('BASEURL') }}bootstrap-tagsinput-latest/dist/bootstrap-tagsinput.css">
+<link href="{{ env('BASEURL') }}css/select2.min.css" rel="stylesheet">
+<style type="text/css">
+    .bootstrap-tagsinput .tag {
+        margin-right: 2px;
+        color: white !important;
+        background-color: #0d6efd;
+        padding: 0.2rem;
+    }
+</style>
+@end
+@section('content')
+<main class="content">
+    <div class="container-fluid p-0">
+        <h1 class="h3 mb-3">Form Materi Karir</h1>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="d-flex justify-content-between">
+                            <h5 class="card-title mb-0">Tambah Materi Karir</h5>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <form class="row g-3" method="post"
+                            action="{{ (act === 'create')?route('web/CareerMaterialsController.store'):route('web/CareerMaterialsController.update', { id: materi.id }) }}{{ (act !== 'create')?'?_method=PUT':'' }}">
+                            {{ csrfField() }}
+                            <div class="col-md-10">
+                                <div class="mb-3">
+                                    <label class="form-label">Judul Materi</label>
+                                    <input type="text" class="form-control" placeholder="Judul halaman"
+                                        name="title_materi" {{ (act !=='create' )? `value="${materi.title}" `:'' }}>
+                                </div>
+                                <div class="html-halaman" data-content="{{ content }}"></div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="mb-3">
+                                    <label for="inputrole" class="form-label">Sub Kategori</label>
+                                    <select class="form-select select" aria-label="Default select example"
+                                        url-data="{{ route('web/CareerCategoriesController.findData') }}"
+                                        name="career_categories_id">
+                                        <option selected>Pilih Sub Kategori</option>
+                                        @if(act !== 'create')
+                                        <option value="{{ materi.subcategory.id }}" selected>{{ materi.subcategory.name
+                                            }}</option>
+                                        @else
+                                        @each(item in subkategori)
+                                        <option value="{{ item.id }}">
+                                            {{ item.name }}</option>
+                                        @end
+                                        @end
+                                    </select>
+                                    @if(flashMessages.has('errors.role_id'))
+                                    <p class="text-danger"> {{ flashMessages.get('errors.role_id') }} </p>
+                                    @end
+                                </div>
+                                <div class="mb-3">
+                                    <label for="inputrole" class="form-label">Tag Meta Data</label>
+                                    <input type="text" class="form-control tags-input" data-role="tagsinput"
+                                        name="tags_materi" {{ (act !=='create' )?`value="${tags}" `:'' }}>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="inputrole" class="form-label">Tentukan jumlah halaman</label>
+                                    <select class="form-select change-halaman" aria-label="Default select example">
+                                        <option selected>Pilih jumlah halaman</option>
+                                        @each(i in halaman)
+                                        <option value="{{ i }}" {{ (act !=='create' &&
+                                            i===materi.content.length)?'selected':'' }}>{{i}}</option>
+                                        @end
+                                    </select>
+                                    @if(flashMessages.has('errors.role_id'))
+                                    <p class="text-danger"> {{ flashMessages.get('errors.role_id') }} </p>
+                                    @end
+                                </div>
+                            </div>
+                            @if(act !== 'show')
+                            <button class="btn btn-primary btn-submit" type="button">Simpan</button>
+                            @end
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+@end
+@section('js')
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+<script src="{{ env('BASEURL') }}bootstrap-tagsinput-latest/dist/bootstrap-tagsinput.min.js"></script>
+<script src="{{ env('BASEURL') }}js/select2.min.js"></script>
+<script src="{{ env('BASEURL') }}jspage/career-materials-form.js"></script>
+@end

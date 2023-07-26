@@ -1,0 +1,60 @@
+@layout('webAdmin/layouts/mainApps')
+@set('title', 'Pelanggan')
+@section('css')
+@end
+@section('content')
+<main class="content">
+    <div class="container-fluid p-0">
+        <h1 class="h3 mb-3">Kelola Pelanggan</h1>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="d-flex justify-content-between">
+                            <h5 class="card-title mb-0">Data Pelanggan</h5>
+                            <button link="{{ route('web/ClientsController.create') }}" type-act="create"
+                                class="btn btn-primary btn-action" type-request="get">Tambah Pelanggan</button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        @if(flashMessages.has('notification'))
+                        <div class="alert alert-success" role="alert">
+                            {{ flashMessages.get('notification') }}
+                        </div>
+                        @end
+                        <div class="table-responsive">
+                            <table id="example" class="table table-bordered table-striped table-hover"
+                                url="{{ route('web/ClientsController.index') }}" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th>Fullname</th>
+                                        <th>Username</th>
+                                        <th>Email</th>
+                                        <th>Status</th>
+                                        <th>Dibuat</th>
+                                        <th width="17%">#</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>Fullname</th>
+                                        <th>Username</th>
+                                        <th>Email</th>
+                                        <th>Status</th>
+                                        <th>Dibuat</th>
+                                        <th width="17%">#</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+@end
+@section('js')
+<script src="{{ env('BASEURL') }}jspage/client.js"></script>
+@end

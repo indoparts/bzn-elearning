@@ -1,0 +1,111 @@
+@layout('webAdmin/layouts/mainApps')
+@set('title', 'Tambah Pelanggan')
+@section('css')
+@end
+@section('content')
+<main class="content">
+    <div class="container-fluid p-0">
+        <h1 class="h3 mb-3">Form Pelanggan</h1>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="d-flex justify-content-between">
+                            <h5 class="card-title mb-0">Tambah Pelanggan</h5>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <form class="row g-3" method="post"
+                            action="{{ (act === 'create')?route('web/ClientsController.store'):route('web/ClientsController.update', { id: client.id }) }}{{ (act !== 'create')?'?_method=PUT':'' }}">
+                            {{ csrfField() }}
+                            <div class="col-md-4">
+                                <label for="input-frontname" class="form-label">Nama Depan</label>
+                                <input type="text" class="form-control" id="input-frontname" name="frontname"
+                                    value="{{ (client)?client.frontname:'' }}">
+                                @if(flashMessages.has('errors.frontname'))
+                                <p class="text-danger"> {{ flashMessages.get('errors.frontname') }} </p>
+                                @end
+                            </div>
+                            <div class="col-md-4">
+                                <label for="input-midname" class="form-label">Nama Tengah</label>
+                                <input type="text" class="form-control" id="input-midname" name="midname"
+                                    value="{{ (client)?client.midname:'' }}">
+                                @if(flashMessages.has('errors.midname'))
+                                <p class="text-danger"> {{ flashMessages.get('errors.midname') }} </p>
+                                @end
+                            </div>
+                            <div class="col-md-4">
+                                <label for="input-backname" class="form-label">Nama Belakang</label>
+                                <input type="text" class="form-control" id="input-backname" name="backname"
+                                    value="{{ (client)?client.backname:'' }}">
+                                @if(flashMessages.has('errors.backname'))
+                                <p class="text-danger"> {{ flashMessages.get('errors.backname') }} </p>
+                                @end
+                            </div>
+                            <div class="col-md-4">
+                                <label for="input-fullname" class="form-label">Nama Lengkap</label>
+                                <input type="text" class="form-control" id="input-fullname" name="fullname"
+                                    value="{{ (client)?client.fullname:'' }}">
+                                @if(flashMessages.has('errors.fullname'))
+                                <p class="text-danger"> {{ flashMessages.get('errors.fullname') }} </p>
+                                @end
+                            </div>
+                            <div class="col-md-4">
+                                <label for="input-username" class="form-label">Username</label>
+                                <input type="text" class="form-control" id="input-username" name="username"
+                                    value="{{ (client)?client.username:'' }}">
+                                @if(flashMessages.has('errors.username'))
+                                <p class="text-danger"> {{ flashMessages.get('errors.username') }} </p>
+                                @end
+                            </div>
+                            <div class="col-md-4">
+                                <label for="input-email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="input-email" name="email"
+                                    value="{{ (client)?client.email:'' }}">
+                                @if(flashMessages.has('errors.email'))
+                                <p class="text-danger"> {{ flashMessages.get('errors.email') }} </p>
+                                @end
+                            </div>
+                            <div class="col-md-4">
+                                <label for="inputPassword4" class="form-label">Kata Sandi</label>
+                                <input type="password" class="form-control" id="inputPassword4" name="password">
+                                @if(flashMessages.has('errors.password'))
+                                <p class="text-danger"> {{ flashMessages.get('errors.password') }} </p>
+                                @end
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="status" id="active" value="active" {{ (client)?(client.status==='active')?'checked':'':'' }}>
+                                    <label class="form-check-label" for="active">
+                                      Aktif
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="status" id="inactive" value="inactive" {{ (client)?(client.status==='inactive')?'checked':'':'' }}>
+                                    <label class="form-check-label" for="inactive">
+                                      Tidak Aktif
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="status" id="block" value="block" {{ (client)?(client.status==='block')?'block':'':'' }}>
+                                    <label class="form-check-label" for="block">
+                                      Blokir
+                                    </label>
+                                  </div>
+                            </div>
+                            @if(act !== 'show')
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary">{{ (act ===
+                                    'create')?'Tambahkan':'Perbaharui' }}</button>
+                            </div>
+                            @end
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+@end
+@section('js')
+@end

@@ -1,0 +1,117 @@
+@layout('webAdmin/layouts/mainApps')
+@set('title', 'Home page')
+@section('content')
+<main class="content">
+    <div class="container-fluid p-0">
+
+        <h1 class="h3 mb-3"><strong>Analisa</strong> Beranda</h1>
+
+        <div class="row">
+            <div class="col-xl-6 col-xxl-5 d-flex">
+                <div class="w-100">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            @component('webAdmin/pages/beranda/components/cardInfo', {
+                            title: 'Materi Belajar',
+                            subtitle: 'Total jumlah materi belajar',
+                            icon: '<i class="fa-solid fa-book"></i>'
+                            })
+                            @slot('value')
+                            <h1 class="mt-1 mb-3">{{ countMateriBelajar[0].total }}</h1>
+                            @end
+                            @end
+                            @component('webAdmin/pages/beranda/components/cardInfo', {
+                            title: 'Materi Karir',
+                            subtitle: 'Total jumlah materi karir',
+                            icon: '<i class="fa-solid fa-book"></i>'
+                            })
+                            @slot('value')
+                            <h1 class="mt-1 mb-3">{{ countMateriKarir[0].total }}</h1>
+                            @end
+                            @end
+                        </div>
+                        <div class="col-sm-6">
+                            @component('webAdmin/pages/beranda/components/cardInfo', {
+                            title: 'Kategori Belajar',
+                            subtitle: 'Total jumlah kategori belajar',
+                            icon: '<i class="fa-solid fa-book"></i>'
+                            })
+                            @slot('value')
+                            <h1 class="mt-1 mb-3">{{ countKategoriBelajar[0].total }}</h1>
+                            @end
+                            @end
+                            @component('webAdmin/pages/beranda/components/cardInfo', {
+                            title: 'Kategori Karir',
+                            subtitle: 'Total jumlah kategori karir',
+                            icon: '<i class="fa-solid fa-book"></i>'
+                            })
+                            @slot('value')
+                            <h1 class="mt-1 mb-3">{{ countKategoriKarir[0].total }}</h1>
+                            @end
+                            @end
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-6 col-xxl-7">
+                <div class="card flex-fill w-100">
+                    <div class="card-header">
+
+                        <h5 class="card-title mb-0">Jumlah materi</h5>
+                    </div>
+                    <div class="card-body py-3">
+                        <div class="chart chart-sm">
+                            <canvas id="chartjs-dashboard-line"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-lg-12 col-xxl-12 d-flex">
+                <div class="card flex-fill">
+                    <div class="card-header">
+
+                        <h5 class="card-title mb-0">Pelanggan aktif</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover my-0 table-pelanggan"
+                                url-data="{{ route('web/BerandasController.index') }}" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th>Nama Depan</th>
+                                        <th>Nama Tengah</th>
+                                        <th>Nama Belakang</th>
+                                        <th>Nama Lengkap</th>
+                                        <th>username</th>
+                                        <th>Email</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>Nama Depan</th>
+                                        <th>Nama Tengah</th>
+                                        <th>Nama Belakang</th>
+                                        <th>Nama Lengkap</th>
+                                        <th>username</th>
+                                        <th>Email</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+@end
+@section('js')
+<script src="jspage/beranda.js"></script>
+@end

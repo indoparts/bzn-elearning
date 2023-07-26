@@ -1,0 +1,79 @@
+@layout('webAdmin/layouts/mainApps')
+@set('title', 'Pengguna')
+@section('css')
+@end
+@section('content')
+<main class="content">
+    <div class="container-fluid p-0">
+        <h1 class="h3 mb-3">Kelola Peran</h1>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="d-flex justify-content-between">
+                            <h5 class="card-title mb-0">Data Peran</h5>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="example" class="table table-bordered table-striped table-hover"
+                                url="{{ route('web/RolesController.index') }}" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th>Nama Role</th>
+                                        <th>Waktu Dibuat</th>
+                                        <th>Waktu Diubah</th>
+                                        <th width="25%">#</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>Nama Role</th>
+                                        <th>Waktu Dibuat</th>
+                                        <th>Waktu Diubah</th>
+                                        <th width="25%">#</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="d-flex justify-content-between">
+                            <h5 class="card-title mb-0">Form Peran</h5>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        @if(flashMessages.has('notification'))
+                        <div class="alert alert-success" role="alert">
+                            {{ flashMessages.get('notification') }}
+                        </div>
+                        @end
+                        <form class="row g-3 form-input" method="post"
+                            action="{{ route('web/RolesController.store') }}">
+                            {{ csrfField() }}
+                            <div class="col-12">
+                                <label for="inputname" class="form-label">Nama</label>
+                                <input type="text" class="form-control" id="inputname" name="name">
+                                @if(flashMessages.has('errors.name'))
+                                <p class="text-danger"> {{ flashMessages.get('errors.name') }} </p>
+                                @end
+                            </div>
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary">Tambahkan</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+@end
+@section('js')
+<script src="{{ env('BASEURL') }}jspage/role.js"></script>
+@end

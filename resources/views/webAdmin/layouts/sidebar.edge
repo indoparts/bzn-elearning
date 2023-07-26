@@ -1,0 +1,29 @@
+<nav id="sidebar" class="sidebar js-sidebar">
+    <div class="sidebar-content js-simplebar">
+        <a class="sidebar-brand" href="index.html">
+            <span class="align-middle">Bizani Learning Center</span>
+        </a>
+        <ul class="sidebar-nav">
+            @each(item in menu)
+                @if(typeof item.child !== 'undefined')
+                    <li class="sidebar-header">
+                        {{ item.text }}
+                    </li>
+                    @each(i in item.child)
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="{{ i.url }}">
+                            {{{ i.icon }}} <span class="align-middle">{{ i.text }}</span>
+                        </a>
+                    </li>
+                    @end
+                @else
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="{{ item.url }}">
+                        {{{ item.icon }}} <span class="align-middle">{{ item.text }}</span>
+                    </a>
+                </li>
+                @end
+            @end
+        </ul>
+    </div>
+</nav>

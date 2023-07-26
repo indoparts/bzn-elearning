@@ -1,0 +1,81 @@
+@layout('webAdmin/layouts/mainApps')
+@set('title', 'Tambah Pengguna')
+@section('css')
+@end
+@section('content')
+<main class="content">
+    <div class="container-fluid p-0">
+        <h1 class="h3 mb-3">Form Pengguna</h1>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="d-flex justify-content-between">
+                            <h5 class="card-title mb-0">Tambah Pengguna</h5>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <form class="row g-3" method="post"
+                            action="{{ (act === 'create')?route('web/UsersController.store'):route('web/UsersController.update', { id: users.id }) }}{{ (act !== 'create')?'?_method=PUT':'' }}">
+                            {{ csrfField() }}
+                            <div class="col-md-4">
+                                <label for="inputname" class="form-label">Nama</label>
+                                <input type="text" class="form-control" id="inputname" name="name" @if(users)
+                                    value="{{ users.name }}" @endif>
+                                @if(flashMessages.has('errors.name'))
+                                <p class="text-danger"> {{ flashMessages.get('errors.name') }} </p>
+                                @end
+                            </div>
+                            <div class="col-md-4">
+                                <label for="inputusername" class="form-label">Username</label>
+                                <input type="text" class="form-control" id="inputusername" name="username" @if(users)
+                                    value="{{ users.username }}" @endif>
+                                @if(flashMessages.has('errors.username'))
+                                <p class="text-danger"> {{ flashMessages.get('errors.username') }} </p>
+                                @end
+                            </div>
+                            <div class="col-md-4">
+                                <label for="inputEmail4" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="inputEmail4" name="email" @if(users)
+                                    value="{{ users.email }}" @endif>
+                                @if(flashMessages.has('errors.email'))
+                                <p class="text-danger"> {{ flashMessages.get('errors.email') }} </p>
+                                @end
+                            </div>
+                            <div class="col-md-6">
+                                <label for="inputPassword4" class="form-label">Kata Sandi</label>
+                                <input type="password" class="form-control" id="inputPassword4" name="password">
+                                @if(flashMessages.has('errors.password'))
+                                <p class="text-danger"> {{ flashMessages.get('errors.password') }} </p>
+                                @end
+                            </div>
+                            <div class="col-md-6">
+                                <label for="inputrole" class="form-label">Peran</label>
+                                <select class="form-select" id="inputrole" name="role_id">
+                                    <option selected>Pilih peran</option>
+                                    @each(item in roles)
+                                    <option value="{{ item.id }}" {{ (users && item.id===users.role_id)?'selected':'' }}>
+                                        {{ item.name }}</option>
+                                    @end
+                                </select>
+                                @if(flashMessages.has('errors.role_id'))
+                                <p class="text-danger"> {{ flashMessages.get('errors.role_id') }} </p>
+                                @end
+                            </div>
+                            @if(act !== 'show')
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary">{{ (act ===
+                                    'create')?'Tambahkan':'Perbaharui' }}</button>
+                            </div>
+                            @end
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+@end
+@section('js')
+<script src="{{ env('BASEURL') }}jspage/user.js"></script>
+@end
