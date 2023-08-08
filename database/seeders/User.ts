@@ -1,10 +1,11 @@
 import BaseSeeder from '@ioc:Adonis/Lucid/Seeder'
 import User from 'App/Models/User'
-import { LearningCategoryFactory, LearningMaterialContentFactory, LearningMaterialFactory, LearningMaterialTagsFactory, LearningSubategoryFactory } from 'Database/factories/LearningFactory'
-import { CareerCategoryFactory, CareerMaterialContentFactory, CareerMaterialFactory, CareerMaterialTagsFactory, CareerSubategoryFactory } from 'Database/factories/CareerFactory'
+// import { LearningCategoryFactory, LearningMaterialContentFactory, LearningMaterialFactory, LearningMaterialTagsFactory, LearningSubategoryFactory } from 'Database/factories/LearningFactory'
+// import { CareerCategoryFactory, CareerMaterialContentFactory, CareerMaterialFactory, CareerMaterialTagsFactory, CareerSubategoryFactory } from 'Database/factories/CareerFactory'
 import { AgreementFactory, UserFactory } from 'Database/factories/UserFactory'
 import Client from 'App/Models/Client'
 import AgreementDatumFactory from 'Database/factories/AgreementDatumFactory'
+import CareerCategory from 'App/Models/CareerCategory'
 
 export default class extends BaseSeeder {
   public async run() {
@@ -34,33 +35,62 @@ export default class extends BaseSeeder {
     await AgreementFactory
       .with('clients', 1)
       .createMany(100)
+    const cCareerData : any[]=[]
+    const cCareer=[
+      'Pertanian, Pangan, dan Sumber Daya Alam',
+      'Ilmu Kesehatan',
+      'Keuangan',
+      'Information Technology',
+      'Education and Training',
+      'Manajemen dan Administrasi Bisnis',
+      'Pemasaran, Penjualan, dan Layanan',
+      'Perhotelan dan Pariwisata',
+      'Science, Technology, Engineering, and Mathematics',
+      'Arsitektur dan Konstruksi',
+      'Pemerintahan dan Administrasi Publik',
+      'Hukum, Keamanan Publik, Pemasyarakatan, dan Keamanan',
+      'Manufaktur',
+      'Transportasi, Distribusi, dan Logistik',
+      'Layanan Manusia',
+      'Seni, Teknologi Audio/Video, dan Komunikasi'
+    ];
+    cCareer.forEach(e => {
+      cCareerData.push({
+        name:e,
+        icon:'example.png',
+        created_by:1
+      })
+    });
 
-    await CareerMaterialContentFactory
-      .with('career_material', 10)
-      .createMany(200)
-    await CareerMaterialTagsFactory
-      .with('career_material', 10)
-      .createMany(200)
-    await CareerMaterialFactory
-      .with('subcategory', 10)
-      .createMany(200)
-    await CareerSubategoryFactory
-      .with('category', 10)
-      .createMany(200)
-    await CareerCategoryFactory.createMany(200)
+    await CareerCategory.createMany(cCareerData);
+    
 
-    await LearningMaterialContentFactory
-      .with('learning_material', 10)
-      .createMany(200)
-    await LearningMaterialTagsFactory
-      .with('learning_material', 10)
-      .createMany(200)
-    await LearningMaterialFactory
-      .with('subcategory', 10)
-      .createMany(200)
-    await LearningSubategoryFactory
-      .with('category', 10)
-      .createMany(200)
-    await LearningCategoryFactory.createMany(200)
+    // await CareerMaterialContentFactory
+    //   .with('career_material', 10)
+    //   .createMany(200)
+    // await CareerMaterialTagsFactory
+    //   .with('career_material', 10)
+    //   .createMany(200)
+    // await CareerMaterialFactory
+    //   .with('subcategory', 10)
+    //   .createMany(200)
+    // await CareerSubategoryFactory
+    //   .with('category', 10)
+    //   .createMany(200)
+    // await CareerCategoryFactory.createMany(200)
+
+    // await LearningMaterialContentFactory
+    //   .with('learning_material', 10)
+    //   .createMany(200)
+    // await LearningMaterialTagsFactory
+    //   .with('learning_material', 10)
+    //   .createMany(200)
+    // await LearningMaterialFactory
+    //   .with('subcategory', 10)
+    //   .createMany(200)
+    // await LearningSubategoryFactory
+    //   .with('category', 10)
+    //   .createMany(200)
+    // await LearningCategoryFactory.createMany(200)
   }
 }
