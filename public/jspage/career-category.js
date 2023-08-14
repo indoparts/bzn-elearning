@@ -15,7 +15,7 @@ $(function () {
             get(link)
                 .done(function (res) {
                     $('.form-input-form-update').attr('action', `${xlink[0]}?_method=patch`)
-                    $('.img-file').attr('src', `${baseUrl()}images/category-learning/${res.icon}`)
+                    $('.img-file').attr('src', `${baseUrl()}images/category-career/${res.icon}`)
                     $('.name-update').val(res.name)
                 })
                 .fail(function (jqXHR, textStatus) {
