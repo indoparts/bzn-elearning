@@ -8,7 +8,13 @@ export default class extends BaseSchema {
       table.increments('id')
       table.integer('learning_subcategory_id').unsigned().references('learning_subcategories.id').onDelete('CASCADE')
       table.integer('created_by').unsigned().references('users.id').onDelete('CASCADE')
+      table.string('cover_img')
       table.string('title')
+      table.string('slug')
+      table.text('description', 'longText')
+      table.string('meta_title')
+      table.text('meta_description', 'longText')
+      table.text('meta_keyword', 'longText')
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL
        */

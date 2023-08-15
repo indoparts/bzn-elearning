@@ -13,7 +13,7 @@ export default class LearningSubcategoriesController {
         {
           typeact: 'btn',
           attr: [
-            { btntext: 'Lihat', icon: '<i class="fa-solid fa-file"></i>', url: 'learning-subcategory', permission: 'read-client' },
+            { btntext: 'Lihat', icon: '<i class="fa-solid fa-eye"></i>', url: 'learning-subcategory', permission: 'read-client' },
             { btntext: 'Ubah', icon: '<i class="fa-solid fa-pen-to-square"></i>', url: 'learning-subcategory', permission: 'update-client' },
             { btntext: 'Hapus', icon: '<i class="fa-sharp fa-solid fa-trash"></i>', url: 'learning-subcategory', permission: 'delete-permission' }
           ]
@@ -31,15 +31,22 @@ export default class LearningSubcategoriesController {
         size: '2mb',
         extnames: ['jpg', 'svg', 'png'],
       }),
+      cover_img: schema.file({
+        size: '2mb',
+        extnames: ['jpg', 'svg', 'png'],
+      }),
     })
     const payload = await request.validate({ schema: newPostSchema })
     let unique = auth.user?.id + '-' + auth.user?.username + '-' + uniqueDatime(new Date())
     let namefile = `sub-category-learning-${unique}`
-    uploadFile(payload.icon, namefile, 'upload/sub-category-learning')
-    const entname = `${namefile}.${payload.icon.extname}`
+    uploadFile(payload.icon, namefile, 'upload/sub-category-learning/icon-img')
+    uploadFile(payload.cover_img, namefile, 'upload/sub-category-learning/cover-img')
+    const entnameicon = `${namefile}.${payload.icon.extname}`
+    const entnamecover = `${namefile}.${payload.cover_img.extname}`
     const post = new LearningSubcategory()
     post.name = payload['name']
-    post.icon = entname
+    post.icon = entnameicon
+    post.cover_image = entnamecover
     const q = await LearningCategory.find(payload['learning_categories_id'])
     q?.related('subcategory').save(post)
     session.flash({ notification: 'Data Berhasil Disimpan!' })

@@ -15,6 +15,8 @@ export default class LearningSubcategory extends BaseModel {
   @column()
   public icon: string
   @column()
+  public cover_image: string
+  @column()
   public name: string
 
   @column.dateTime({ autoCreate: true })

@@ -3,6 +3,9 @@ import { BaseModel, BelongsTo, HasMany, belongsTo, column, hasMany } from '@ioc:
 import CareerMaterial from './CareerMaterial'
 import CareerCategory from './CareerCategory'
 import User from './User'
+import CareerSubcategoryInfo from './CareerSubcategoryInfo'
+import CareerSubcategorySalary from './CareerSubcategorySalary'
+import CareerSubcategorySkill from './CareerSubcategorySkill'
 
 export default class CareerSubcategory extends BaseModel {
   @column({ isPrimary: true })
@@ -15,7 +18,27 @@ export default class CareerSubcategory extends BaseModel {
   @column()
   public icon: string
   @column()
+  public cover_img: string
+  @column()
   public name: string
+  @column()
+  public slug: string
+  @column()
+  public description: string
+  @column()
+  public meta_title: string
+  @column()
+  public meta_description: string
+  @column()
+  public meta_keyword: string
+  @column()
+  public alternate_name: string
+  @column()
+  public conclusion: string
+  @column()
+  public advise_from_wise: string
+  @column()
+  public did_you_know: string
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
@@ -38,4 +61,20 @@ export default class CareerSubcategory extends BaseModel {
     foreignKey: 'career_subcategory_id'
   })
   public subcategory: HasMany<typeof CareerMaterial>
+
+  @hasMany(() => CareerSubcategoryInfo, {
+    localKey: 'id',
+    foreignKey: 'career_subcategory_id'
+  })
+  public info: HasMany<typeof CareerSubcategoryInfo>
+  @hasMany(() => CareerSubcategorySalary, {
+    localKey: 'id',
+    foreignKey: 'career_subcategory_id'
+  })
+  public salary: HasMany<typeof CareerSubcategorySalary>
+  @hasMany(() => CareerSubcategorySkill, {
+    localKey: 'id',
+    foreignKey: 'career_subcategory_id'
+  })
+  public skill: HasMany<typeof CareerSubcategorySkill>
 }

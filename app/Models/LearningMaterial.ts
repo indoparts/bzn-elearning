@@ -14,7 +14,19 @@ export default class LearningMaterial extends BaseModel {
   @column()
   public created_by: number
   @column()
+  public cover_img: string
+  @column()
   public title: string
+  @column()
+  public slug: string
+  @column()
+  public description: string
+  @column()
+  public meta_title: string
+  @column()
+  public meta_description: string
+  @column()
+  public meta_keyword: string
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

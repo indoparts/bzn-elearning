@@ -8,7 +8,12 @@ export default class extends BaseSchema {
       table.increments('id')
       table.integer('created_by').unsigned().references('users.id').onDelete('CASCADE')
       table.string('icon')
+      table.string('cover_img')
       table.string('name')
+      table.text('description', 'longtext')
+      table.string('meta_title')
+      table.text('meta_description', 'longtext')
+      table.text('meta_keyword', 'longtext')
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL
        */

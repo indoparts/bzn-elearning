@@ -39,8 +39,10 @@ $(function () {
             }
             get(link)
                 .done(function (res) {
+                    console.log(res);
                     $('.form-input-form-send').attr('action', `${xlink[0]}?_method=patch`)
-                    $('.img-file').attr('src', `${baseUrl()}images/sub-category-learning/${res[0].icon}`)
+                    $('.img-icon').attr('src', `${baseUrl()}images/sub-category-learning/icon-img/${res[0].icon}`)
+                    $('.img-cover').attr('src', `${baseUrl()}images/sub-category-learning/cover-img/${res[0].cover_img}`)
                     $('.name').val(res[0].name)
                     $('.form-select').html(`<option value="${res[0].category.id}" selected>${res[0].category.name}</option>`)
                 })

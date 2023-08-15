@@ -9,6 +9,7 @@ export default class extends BaseSchema {
       table.integer('learning_category_id').unsigned().references('learning_categories.id').onDelete('CASCADE')
       table.integer('created_by').unsigned().references('users.id').onDelete('CASCADE')
       table.string('icon')
+      table.string('cover_image')
       table.string('name')
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL

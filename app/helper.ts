@@ -37,15 +37,17 @@ export async function datatables(req, table, col, act) {
 
         if (act !== null) {
             if (act.typeact === 'btn' && act.attr.length !== 0) {
-                action += '<div class="btn-group btn-group-sm" role="group" aria-label="">'
+                action += '<div class="dropdown show">'
+                action += '<a class="btn btn-default dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown link</a>'
+                action += '<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">'
                 act.attr.forEach(async e => {
                     let p = e.permission.split("-");
-                    action += `<button link='${(p[0] === 'update' || p[0] === 'edit') ? e.url + '/' + el.id + '/edit' : e.url + '/' + el.id}' type-act='${p[0]}' class="btn btn-${btnColor(p[0])} btn-action" type-request="${(p[0] === 'read' || p[0] === 'edit' || p[0] === 'update') ? 'get' : 'delete'}">${e.icon} ${e.btntext}</button>`
+                    action += `<a link='${(p[0] === 'update' || p[0] === 'edit') ? e.url + '/' + el.id + '/edit' : e.url + '/' + el.id}' type-act='${p[0]}' class="btn-action dropdown-item" type-request="${(p[0] === 'read' || p[0] === 'edit' || p[0] === 'update') ? 'get' : 'delete'}">${e.icon} ${e.btntext}</a>`
                 });
+                action += '</div>'
                 action += '</div>'
             }
         }
-
         const fetch = {}
         col.forEach(e => {
             fetch[e] = el[e]

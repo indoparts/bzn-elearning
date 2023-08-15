@@ -13,7 +13,17 @@ export default class CareerCategory extends BaseModel {
   @column()
   public icon: string
   @column()
+  public cover_img: string
+  @column()
   public name: string
+  @column()
+  public description: string
+  @column()
+  public meta_title: string
+  @column()
+  public meta_description: string
+  @column()
+  public meta_keyword: string
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
