@@ -8,31 +8,27 @@
     <meta name="_csrf" content="{{ csrfToken }}" />
     <meta name="base_url" content="{{ env('BASEURL') }}" />
     <title>{{ title }}</title>
-    <link href="{{ env('BASEURL') }}fontawesome/css/all.min.css" rel="stylesheet">
-    <link href="{{ env('BASEURL') }}css/app.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{ env('BASEURL') }}css/datatables.min.css">
+    <link href="{{ env('BASEURL') }}assets/fontawesome/css/all.min.css" rel="stylesheet">
+    <link href="{{ env('BASEURL') }}assets/css/styles.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     @!section('css')
 </head>
 
 <body>
-    <div class="wrapper">
-        @include('webAdmin/layouts/sidebar')
-
-        <div class="main">
-            @include('webAdmin/layouts/navbar')
-
-            @!section('content')
-
-            @include('webAdmin/layouts/footer')
-        </div>
+    <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+    data-sidebar-position="fixed" data-header-position="fixed">
+    @include('webAdmin/layouts/sidebar')
+    <div class="body-wrapper">
+      @include('webAdmin/layouts/navbar')
+      @!section('content')
     </div>
-    <script src="{{ env('BASEURL') }}js/app.js"></script>
-    <script src="{{ env('BASEURL') }}js/jquery.min.js"></script>
-    <script src="{{ env('BASEURL') }}js/datatables.min.js"></script>
-    <script src="{{ env('BASEURL') }}js/sweetalert2.min.js"></script>
-    <script src="{{ env('BASEURL') }}js/application.js"></script>
-    @!section('js')
+  </div>
+  <script src="{{ env('BASEURL') }}assets/libs/jquery/dist/jquery.min.js"></script>
+  <script src="{{ env('BASEURL') }}assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="{{ env('BASEURL') }}assets/js/sidebarmenu.js"></script>
+  <script src="{{ env('BASEURL') }}assets/js/app.min.js"></script>
+  <script src="{{ env('BASEURL') }}assets/libs/simplebar/dist/simplebar.js"></script>
+  @!section('js')
 </body>
 
 </html>
