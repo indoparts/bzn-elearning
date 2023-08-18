@@ -1,56 +1,25 @@
 @layout('webAdmin/layouts/mainApps')
 @set('title', 'Pengguna')
 @section('css')
-@end
+<link rel="stylesheet" href="{{ env('BASEURL') }}assets/datatables.min.css">
+@endsection
 @section('content')
-<main class="content">
-    <div class="container-fluid p-0">
-        <h1 class="h3 mb-3">Kelola Pengguna</h1>
-        <div class="row">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="d-flex justify-content-between">
-                            <h5 class="card-title mb-0">Data Pengguna</h5>
-                            <button link="{{ route('web/UsersController.create') }}" type-act="create"
-                                class="btn btn-primary btn-action" type-request="get">Tambah pengguna</button>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        @if(flashMessages.has('notification'))
-                        <div class="alert alert-success" role="alert">
-                            {{ flashMessages.get('notification') }}
-                        </div>
-                        @end
-                        <div class="table-responsive">
-                            <table id="example" class="table table-bordered table-striped table-hover"
-                                url="{{ route('web/UsersController.index') }}" width="100%">
-                                <thead>
-                                    <tr>
-                                        <th>Nama</th>
-                                        <th>Username</th>
-                                        <th>Email</th>
-                                        <th width="17%">#</th>
-                                    </tr>
-                                </thead>
-                                <tbody></tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>Nama</th>
-                                        <th>Username</th>
-                                        <th>Email</th>
-                                        <th width="17%">#</th>
-                                    </tr>
-                                </tfoot>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</main>
-@end
+<div class="container-fluid">
+    @!component('webAdmin/components/cardtable', {
+        table:{
+            titletable:'Data Pengguna',
+            idtable:'example',
+            urltable: route('web/UsersController.index'),
+            headertable: ['nama', 'username', 'email', '#']
+        },
+        btn:{
+            urlbtn: route('web/UsersController.create'),
+            btnname:'Tambah Pengguna',
+        }
+    })
+</div>
+@endsection
 @section('js')
+<script src="{{ env('BASEURL') }}assets/datatables.min.js"></script>
 <script src="{{ env('BASEURL') }}jspage/user.js"></script>
-@end
+@endsection

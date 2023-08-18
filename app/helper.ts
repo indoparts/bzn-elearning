@@ -37,14 +37,11 @@ export async function datatables(req, table, col, act) {
 
         if (act !== null) {
             if (act.typeact === 'btn' && act.attr.length !== 0) {
-                action += '<div class="dropdown show">'
-                action += '<a class="btn btn-default dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown link</a>'
-                action += '<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">'
+                action += '<div class="btn-group btn-group-sm" role="group" aria-label="Basic outlined example">'
                 act.attr.forEach(async e => {
                     let p = e.permission.split("-");
-                    action += `<a link='${(p[0] === 'update' || p[0] === 'edit') ? e.url + '/' + el.id + '/edit' : e.url + '/' + el.id}' type-act='${p[0]}' class="btn-action dropdown-item" type-request="${(p[0] === 'read' || p[0] === 'edit' || p[0] === 'update') ? 'get' : 'delete'}">${e.icon} ${e.btntext}</a>`
+                    action += `<a link='${(p[0] === 'update' || p[0] === 'edit') ? e.url + '/' + el.id + '/edit' : e.url + '/' + el.id}' type-act='${p[0]}' class="btn-action btn btn-outline-primary" type-request="${(p[0] === 'read' || p[0] === 'edit' || p[0] === 'update') ? 'get' : 'delete'}">${e.icon} ${e.btntext}</a>`
                 });
-                action += '</div>'
                 action += '</div>'
             }
         }
@@ -64,27 +61,6 @@ export async function datatables(req, table, col, act) {
         recordsFiltered: totalFiltered['total'][0].total,
         data: data
     };
-}
-
-function btnColor(indicatour) {
-    switch (indicatour) {
-        case 'read':
-            return 'info'
-            break;
-        case 'update':
-            return 'success'
-            break;
-        case 'edit':
-            return 'success'
-            break;
-        case 'delete':
-            return 'danger'
-            break;
-
-        default:
-            return 'default'
-            break;
-    }
 }
 
 export async function uploadFile(req, fileRename, pathFile) {

@@ -1,0 +1,7 @@
+<div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon1">{{ icon }}</span>
+    <input type="{{ type }}" class="form-control" placeholder="{{ placeholder }}" name="{{ name }}">
+    @if(flashMessages.has('errors.name'))
+    <p class="text-danger"> {{ flashMessages.get('errors.name') }} </p>
+    @end
+</div>
