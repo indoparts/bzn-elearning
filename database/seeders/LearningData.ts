@@ -53,7 +53,8 @@ export default class extends BaseSeeder {
           $dataIt.push({
             learning_category_id: $cekit.id,
             created_by: $user.id,
-            icon: `${e}.png`,
+            icon: `default.png`,
+            cover_image: `default.png`,
             name: e,
           })
         })
@@ -67,7 +68,8 @@ export default class extends BaseSeeder {
           $dataKesehatan.push({
             learning_category_id: $cekKesehatan.id,
             created_by: $user.id,
-            icon: `${e}.png`,
+            icon: `default.png`,
+            cover_image: `default.png`,
             name: e,
           })
         })
@@ -81,7 +83,8 @@ export default class extends BaseSeeder {
           $dataBahasa.push({
             learning_category_id: $cekBahasa.id,
             created_by: $user.id,
-            icon: `${e}.png`,
+            icon: `default.png`,
+            cover_image: `default.png`,
             name: e,
           })
         })
@@ -95,7 +98,8 @@ export default class extends BaseSeeder {
           $dataBisnis.push({
             learning_category_id: $cekBisnis.id,
             created_by: $user.id,
-            icon: `${e}.png`,
+            icon: `default.png`,
+            cover_image: `default.png`,
             name: e,
           })
         })
@@ -109,7 +113,8 @@ export default class extends BaseSeeder {
           $dataPengelolaan.push({
             learning_category_id: $cekPengelolaan.id,
             created_by: $user.id,
-            icon: `${e}.png`,
+            icon: `default.png`,
+            cover_image: `default.png`,
             name: e,
           })
         })
@@ -122,7 +127,8 @@ export default class extends BaseSeeder {
           $dataPengDiri.push({
             learning_category_id: $cekPengDiri.id,
             created_by: $user.id,
-            icon: `${e}.png`,
+            icon: `default.png`,
+            cover_image: `default.png`,
             name: e,
           })
         })
@@ -136,7 +142,8 @@ export default class extends BaseSeeder {
           $dataPenPem.push({
             learning_category_id: $cekPenPem.id,
             created_by: $user.id,
-            icon: `${e}.png`,
+            icon: `default.png`,
+            cover_image: `default.png`,
             name: e,
           })
         })
@@ -150,7 +157,8 @@ export default class extends BaseSeeder {
           $dataTeknik.push({
             learning_category_id: $cekTeknik.id,
             created_by: $user.id,
-            icon: `${e}.png`,
+            icon: `default.png`,
+            cover_image: `default.png`,
             name: e,
           })
         })
@@ -164,7 +172,8 @@ export default class extends BaseSeeder {
           $dataPengajaran.push({
             learning_category_id: $cekPengajaran.id,
             created_by: $user.id,
-            icon: `${e}.png`,
+            icon: `default.png`,
+            cover_image: `default.png`,
             name: e,
           })
         })
