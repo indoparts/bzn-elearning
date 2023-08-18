@@ -1,0 +1,46 @@
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title mb-5">{{ titleform }}</h5>
+    <form action="{{ form.action }}" method="{{ form.method }}">
+    {{ csrfField() }}
+    <div class="row mb-5">
+      @each(item in field)
+      @if(item.type === 'input')
+        <div class="col-md">
+          @!component('webAdmin/components/form/input', {
+            icon: item.attr.icon,
+            type: item.attr.type,
+            placeholder: item.attr.placeholder,
+            name: item.attr.name,
+            value: item.attr.value,
+          })
+        </div>
+      @endif
+      @if(item.type === 'select')
+        <div class="col-md">
+          @!component('webAdmin/components/form/select', {
+            icon: item.attr.icon,
+            name: item.attr.name,
+            itemoptions: item.attr.itemoptions,
+            value:item.attr.value
+          })
+        </div>
+      @endif
+      @if(item.type === 'switch')
+        <div class="col-md">
+          @!component('webAdmin/components/form/switch', {
+            checkdata:item.checkdata
+          })
+        </div>
+      @endif
+    @endeach
+    </div>
+    @!component('webAdmin/components/button', {
+      colorclass:btnsubmit.colorclass,
+      type:btnsubmit.type,
+      btnname:btnsubmit.btnname,
+      disabled: btnsubmit.disabled,
+    })
+    </form>
+  </div>
+</div>

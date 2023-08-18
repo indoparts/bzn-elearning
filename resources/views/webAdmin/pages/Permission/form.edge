@@ -1,0 +1,61 @@
+@layout('webAdmin/layouts/mainApps')
+@set('title', 'Tambah Peran')
+@section('css')
+@end
+@section('content')
+<div class="container-fluid">
+    @!component('webAdmin/components/form', {
+        titleform: 'Form Akses',
+        form:{
+            action:route('web/PermissionsController.store'),
+            method:'post'
+        },
+        field:[
+            {
+                type:'input',
+                attr:{
+                    icon:'<i class="fa-solid fa-group-arrows-rotate"></i>',
+                    type:'text',
+                    placeholder:'Tulis nama akses disini.',
+                    name:'name',
+                    value: role ? role.name:''
+                }
+            },
+            {
+                type:'switch',
+                checkdata:[
+                    {
+                        name:'permission[]',
+                        value:'create',
+                        label:'create'
+                    },
+                    {
+                        name:'permission[]',
+                        value:'read',
+                        label:'read'
+                    },
+                    {
+                        name:'permission[]',
+                        value:'update',
+                        label:'update'
+                    },
+                    {
+                        name:'permission[]',
+                        value:'delete',
+                        label:'delete'
+                    },
+                ]
+            }
+        ],
+        btnsubmit:{
+            colorclass:'primary',
+            type:'submit',
+            btnname:'Simpan',
+            disabled: act === 'show' ? true : false
+        }
+      })
+</div>
+@end
+@section('js')
+<script src="{{ env('BASEURL') }}jspage/akses.js"></script>
+@end

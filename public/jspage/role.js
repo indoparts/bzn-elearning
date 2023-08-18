@@ -1,26 +1,11 @@
 $(function () {
-    index();
+    if( $('#example').length ){
+        index();
+    }
     $(document).on('click', '.btn-action', function () {
         let type = $(this).attr('type-act')
         if ($(this).attr('type-request') === 'get') {
-            get($(this).attr('link'))
-                .done(function (res) {
-                    $('.form-input').attr('action', `${$('.form-input').attr('action')}/${res.data.id}?_method=PUT`)
-                    $('#inputname').val(res.data.name)
-                    $('.btn-primary').html('Perbaharui')
-                    if (type === 'read') {
-                        $('.btn-primary').hide()
-                    }else{
-                        $('.btn-primary').show()
-                    }
-                })
-                .fail(function (jqXHR, textStatus) {
-                    Swal.fire(
-                        'Tindakan Gagal!',
-                        'Terjadi kesalahan dengan code ' + textStatus + ', hubungi tim pengembang aplikasi!',
-                        'info'
-                    );
-                });
+            window.location.replace($(this).attr('link'));
         } else {
             Swal.fire({
                 title: 'Apa kamu yakin?',

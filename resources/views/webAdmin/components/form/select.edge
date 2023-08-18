@@ -1,0 +1,11 @@
+<div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon1">{{{ icon }}}</span>
+    <select class="form-select" aria-label="Default select example" name="{{ name }}">
+        @each(item in itemoptions)
+        <option value="{{ item.id }}" {{ parseInt(value) === item.id ? 'selected' : '' }}>{{ item.text }}</option>
+        @endeach
+    </select>
+    @if(flashMessages.has('errors.name'))
+    <p class="text-danger"> {{ flashMessages.get('errors.name') }} </p>
+    @end
+</div>

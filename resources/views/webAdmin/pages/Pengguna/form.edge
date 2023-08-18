@@ -3,7 +3,7 @@
 @section('css')
 @end
 @section('content')
-<main class="content">
+{{--  <main class="content">
     <div class="container-fluid p-0">
         <h1 class="h3 mb-3">Form Pengguna</h1>
         <div class="row">
@@ -74,7 +74,76 @@
             </div>
         </div>
     </div>
-</main>
+</main>  --}}
+<div class="container-fluid">
+    @!component('webAdmin/components/form', {
+        titleform: 'Form Peran',
+        form:{
+            action:act==='create'? 
+            route('web/UsersController.store')
+            :
+            `${route('web/UsersController.update', { id: users.id })}?_method=PUT`,
+            method:'post'
+        },
+        field:[
+            {
+                type:'input',
+                attr:{
+                    icon:'<i class="fa-solid fa-address-card"></i>',
+                    type:'text',
+                    placeholder:'Tulis nama pengguna disini.',
+                    name:'name',
+                    value: users ? users.name:''
+                }
+            },
+            {
+                type:'input',
+                attr:{
+                    icon:'<i class="fa-solid fa-fingerprint"></i>',
+                    type:'text',
+                    placeholder:'Tulis username pengguna disini.',
+                    name:'username',
+                    value: users ? users.username:''
+                }
+            },
+            {
+                type:'input',
+                attr:{
+                    icon:'<i class="fa-solid fa-envelopes-bulk"></i>',
+                    type:'email',
+                    placeholder:'Tulis email pengguna disini.',
+                    name:'email',
+                    value: users ? users.email:''
+                }
+            },
+            {
+                type:'input',
+                attr:{
+                    icon:'<i class="fa-solid fa-lock"></i>',
+                    type:'password',
+                    placeholder:'Tulis password pengguna disini.',
+                    name:'password',
+                    value: users ? users.password:''
+                }
+            },
+            {
+                type:'select',
+                attr:{
+                    icon:'<i class="fa-solid fa-group-arrows-rotate"></i>',
+                    name:'password',
+                    itemoptions: roles,
+                    value: users?users.role_id:''
+                }
+            }
+        ],
+        btnsubmit:{
+            colorclass:'primary',
+            type:'submit',
+            btnname:'Simpan',
+            disabled: act === 'show' ? true : false
+        }
+      })
+</div>
 @end
 @section('js')
 <script src="{{ env('BASEURL') }}jspage/user.js"></script>

@@ -29,15 +29,15 @@
                     </li>
                     @endeach
                 @else
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="{{ item.url }}" aria-expanded="false">
+                        <span>
+                            {{{ item.icon }}}
+                        </span>
+                        <span class="hide-menu">{{ item.text }}</span>
+                    </a>
+                </li>
                 @endif
-                    <li class="sidebar-item">
-                        <a class="sidebar-link" href="{{ item.url }}" aria-expanded="false">
-                            <span>
-                                {{{ item.icon }}}
-                            </span>
-                            <span class="hide-menu">{{ item.text }}</span>
-                        </a>
-                    </li>
                 @endeach
             </ul>
         </nav>

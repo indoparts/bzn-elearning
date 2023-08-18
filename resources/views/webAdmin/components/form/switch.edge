@@ -1,0 +1,6 @@
+@each(item in checkdata)
+<div class="form-check form-switch">
+    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault{{ item }}" name="{{ item.name }}" value="item.value">
+    <label class="form-check-label" for="flexSwitchCheckDefault{{ item }}">{{ item.label }}</label>
+</div>
+@endeach

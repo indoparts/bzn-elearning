@@ -27,7 +27,14 @@ export default class UsersController {
     public async create({ bouncer, view }: HttpContextContract) {
         await bouncer.authorize("create-user")
         const role = await Role.all()
-        return view.render('webAdmin/pages/Pengguna/form', { roles: role, act: 'create' })
+        const $arrrole : any[]=[]
+        role.forEach(e => {
+            $arrrole.push({
+                id:e.id,
+                text:e.name
+            })
+        });
+        return view.render('webAdmin/pages/Pengguna/form', { roles: $arrrole, act: 'create' })
     }
 
     public async store({ bouncer, request, response, session }: HttpContextContract) {
@@ -47,7 +54,14 @@ export default class UsersController {
         if (await bouncer.allows('read-user')) {
             const user = await User.find(request.param('id'))
             const role = await Role.all()
-            return view.render('webAdmin/pages/Pengguna/form', { roles: role, users: user, act: 'show' })
+            const $arrrole : any[]=[]
+            role.forEach(e => {
+                $arrrole.push({
+                    id:e.id,
+                    text:e.name
+                })
+            });
+            return view.render('webAdmin/pages/Pengguna/form', { roles: $arrrole, users: user, act: 'show' })
         }
     }
 
@@ -56,7 +70,14 @@ export default class UsersController {
         if (await bouncer.allows('update-user')) {
             const user = await User.find(request.param('id'))
             const role = await Role.all()
-            return view.render('webAdmin/pages/Pengguna/form', { roles: role, users: user, act: 'update' })
+            const $arrrole : any[]=[]
+            role.forEach(e => {
+                $arrrole.push({
+                    id:e.id,
+                    text:e.name
+                })
+            });
+            return view.render('webAdmin/pages/Pengguna/form', { roles: $arrrole, users: user, act: 'update' })
         }
     }
 

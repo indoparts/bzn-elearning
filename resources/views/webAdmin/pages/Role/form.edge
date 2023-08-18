@@ -1,0 +1,39 @@
+@layout('webAdmin/layouts/mainApps')
+@set('title', 'Tambah Peran')
+@section('css')
+@end
+@section('content')
+<div class="container-fluid">
+    @!component('webAdmin/components/form', {
+        titleform: 'Form Peran',
+        form:{
+            action:act==='create'? 
+            route('web/RolesController.store')
+            :
+            `${route('web/RolesController.update', { id: role.id })}?_method=PUT`,
+            method:'post'
+        },
+        field:[
+            {
+                type:'input',
+                attr:{
+                    icon:'<i class="fa-solid fa-group-arrows-rotate"></i>',
+                    type:'text',
+                    placeholder:'Tulis nama peran disini.',
+                    name:'name',
+                    value: role ? role.name:''
+                }
+            }
+        ],
+        btnsubmit:{
+            colorclass:'primary',
+            type:'submit',
+            btnname:'Simpan',
+            disabled: act === 'show' ? true : false
+        }
+      })
+</div>
+@end
+@section('js')
+<script src="{{ env('BASEURL') }}jspage/role.js"></script>
+@end

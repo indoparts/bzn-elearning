@@ -1,5 +1,7 @@
 $(function () {
-    index();
+    if( $('#example').length ){
+        index();
+    }
     $(document).on('click', '.btn-action', function () {
         if ($(this).attr('type-request') === 'get') {
             window.location.replace($(this).attr('link'));

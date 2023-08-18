@@ -23,6 +23,11 @@ export default class RolesController {
         return view.render('webAdmin/pages/Role/index', { roles: null, })
     }
 
+    public async create({ bouncer, view }: HttpContextContract) {
+        await bouncer.authorize("create-role")
+        return view.render('webAdmin/pages/Role/form', { act: 'create' })
+    }
+
     public async store({ bouncer, request, session, response }: HttpContextContract) {
         await bouncer.authorize("create-role")
         if (await bouncer.allows('create-role')) {
@@ -39,19 +44,19 @@ export default class RolesController {
         }
     }
 
-    public async show({ bouncer, request, response }: HttpContextContract) {
+    public async show({ bouncer, request, view }: HttpContextContract) {
         await bouncer.authorize("read-role")
         if (await bouncer.allows('read-role')) {
             const q = await Role.find(request.param('id'));
-            return response.send({ status: true, data: q, msg: 'success' })
+            return view.render('webAdmin/pages/Role/form', { act: 'show', role:q })
         }
     }
 
-    public async edit({ bouncer, request, response }: HttpContextContract) {
+    public async edit({ bouncer, request, view }: HttpContextContract) {
         await bouncer.authorize("update-user")
         if (await bouncer.allows('update-user')) {
             const q = await Role.find(request.param('id'))
-            return response.send({ status: true, data: q, msg: 'success' })
+            return view.render('webAdmin/pages/Role/form', { act: 'update', role:q })
         }
     }
 
@@ -66,7 +71,7 @@ export default class RolesController {
             const role = await Role.findOrFail(request.param('id'))
             role.merge(payload)
             await role.save()
-            session.flash({ notification: 'Data Berhasil Disimpan!' })
+            session.flash({ notification: 'Data Berhasil Disimpan!', type:'success' })
             return response.redirect().toRoute('web/RolesController.index')
         }
     }
@@ -84,3 +89,4 @@ export default class RolesController {
         }
     }
 }
+

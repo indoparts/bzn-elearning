@@ -3,126 +3,124 @@
 @section('css')
 @end
 @section('content')
-<main class="content">
-    <div class="container-fluid p-0">
-        <h1 class="h3 mb-3">Kelola Pengaturan Hak Akses Peran</h1>
-        <form action="{{ route('web/SetRolePermissionsController.store') }}" method="post">
-            {{ csrfField() }}
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="d-flex justify-content-between">
-                                <h5 class="card-title mb-0">Data Pengaturan Hak Akses Peran</h5>
-                            </div>
+<div class="container-fluid">
+    <h1 class="h3 mb-3">Kelola Pengaturan Hak Akses Peran</h1>
+    <form action="{{ route('web/SetRolePermissionsController.store') }}" method="post">
+        {{ csrfField() }}
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="d-flex justify-content-between">
+                            <h5 class="card-title mb-0">Data Pengaturan Hak Akses Peran</h5>
                         </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table id="example" class="table table-bordered table-striped table-hover" width="100%">
-                                    <thead>
-                                        <tr>
-                                            <th width="15%">
-                                                #
-                                            </th>
-                                            <th>Nama Akses</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @each(item in permission.data)
-                                        <tr>
-                                            <td>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox"
-                                                        id="permission-{{ item.id }}" value="{{ item.id }}"
-                                                        id="flexCheckChecked" name="permission_id[]">
-                                                    <label class="form-check-label" for="flexCheckChecked">
-                                                        Akses
-                                                    </label>
-                                                </div>
-                                            </td>
-                                            <td>{{ item.name }}</td>
-                                        </tr>
-                                        @end
-                                    </tbody>
-                                    @if(permission.meta.last_page > 1)
-                                    <tfoot>
-                                        <tr>
-                                            <th colspan="2">
-                                                <nav aria-label="Page navigation example">
-                                                    <ul class="pagination justify-content-center">
-                                                        <li
-                                                            class="page-item {{ permission.meta.current_page === permission.meta.first_page ? 'disabled' : '' }}">
-                                                            <a class="page-link"
-                                                                href="{{ permission.meta.current_page === permission.meta.first_page ? '#' : '?page=' + (permission.meta.current_page - 1) }}">
-                                                                <span aria-hidden="true">&laquo;</span>
-                                                            </a>
-                                                        </li>
-                                                        @each(page in range(1, permission.meta.last_page))
-                                                        <li
-                                                            class="page-item {{ (page === permission.meta.current_page)?'disabled':'' }}">
-                                                            <a class="page-link" href="?page={{ page }}">{{ page }}</a>
-                                                        </li>
-                                                        @endeach
-                                                        <li
-                                                            class="page-item {{ permission.meta.last_page === permission.meta.current_page ? 'disabled' : '' }}">
-                                                            <a class="page-link"
-                                                                href="{{ permission.meta.last_page === permission.meta.current_page ? '#' : '?page=' + (permission.meta.current_page + 1) }}">
-                                                                <span aria-hidden="true">&raquo;</span>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </nav>
-                                            </th>
-                                        </tr>
-                                    </tfoot>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="example" class="table table-bordered table-striped table-hover" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th width="15%">
+                                            #
+                                        </th>
+                                        <th>Nama Akses</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @each(item in permission.data)
+                                    <tr>
+                                        <td>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox"
+                                                    id="permission-{{ item.id }}" value="{{ item.id }}"
+                                                    id="flexCheckChecked" name="permission_id[]">
+                                                <label class="form-check-label" for="flexCheckChecked">
+                                                    Akses
+                                                </label>
+                                            </div>
+                                        </td>
+                                        <td>{{ item.name }}</td>
+                                    </tr>
                                     @end
-                                </table>
-                            </div>
+                                </tbody>
+                                @if(permission.meta.last_page > 1)
+                                <tfoot>
+                                    <tr>
+                                        <th colspan="2">
+                                            <nav aria-label="Page navigation example">
+                                                <ul class="pagination justify-content-center">
+                                                    <li
+                                                        class="page-item {{ permission.meta.current_page === permission.meta.first_page ? 'disabled' : '' }}">
+                                                        <a class="page-link"
+                                                            href="{{ permission.meta.current_page === permission.meta.first_page ? '#' : '?page=' + (permission.meta.current_page - 1) }}">
+                                                            <span aria-hidden="true">&laquo;</span>
+                                                        </a>
+                                                    </li>
+                                                    @each(page in range(1, permission.meta.last_page))
+                                                    <li
+                                                        class="page-item {{ (page === permission.meta.current_page)?'disabled':'' }}">
+                                                        <a class="page-link" href="?page={{ page }}">{{ page }}</a>
+                                                    </li>
+                                                    @endeach
+                                                    <li
+                                                        class="page-item {{ permission.meta.last_page === permission.meta.current_page ? 'disabled' : '' }}">
+                                                        <a class="page-link"
+                                                            href="{{ permission.meta.last_page === permission.meta.current_page ? '#' : '?page=' + (permission.meta.current_page + 1) }}">
+                                                            <span aria-hidden="true">&raquo;</span>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </nav>
+                                        </th>
+                                    </tr>
+                                </tfoot>
+                                @end
+                            </table>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="d-flex justify-content-between">
-                                <h5 class="card-title mb-0">Data Peran Tersedia</h5>
-                            </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="d-flex justify-content-between">
+                            <h5 class="card-title mb-0">Data Peran Tersedia</h5>
                         </div>
-                        <div class="card-body">
-                            <form action="" method="post">
-                                <div class="input-group">
-                                    <select class="form-select" id="inputGroupSelect04"
-                                        url-get="{{ route('web/SetRolePermissionsController.index') }}" name="role_id">
-                                        <option selected>Pilih peran</option>
-                                        @each(i in roles)
-                                        <option value="{{ i.id }}">{{ i.name }}</option>
-                                        @end
-                                    </select>
-                                    <button class="btn btn-outline-secondary" type="submit">Simpan</button>
-                                </div>
-                            </form>
-                            @if(flashMessages.has('notification'))
-                            <div class="alert alert-{{ flashMessages.get('status') }} " style="margin-top: 10px;" role="alert">
-                                {{ flashMessages.get('notification') }}
+                    </div>
+                    <div class="card-body">
+                        <form action="" method="post">
+                            <div class="input-group">
+                                <select class="form-select" id="inputGroupSelect04"
+                                    url-get="{{ route('web/SetRolePermissionsController.index') }}" name="role_id">
+                                    <option selected>Pilih peran</option>
+                                    @each(i in roles)
+                                    <option value="{{ i.id }}">{{ i.name }}</option>
+                                    @end
+                                </select>
+                                <button class="btn btn-outline-secondary" type="submit">Simpan</button>
                             </div>
-                            @end
-                            <div style="margin-top: 40px;">
-                                <div class="alert alert-info" role="alert">
-                                    <h4 class="alert-heading">Atur akses tiap peran disini!</h4>
-                                    <p>Akses tiap peran pada setiap menu atau fungsi yang ada akan ditentukan dari
-                                        perizinan
-                                        akses pada form ini.</p>
-                                    <hr>
-                                    <p class="mb-0">Anda dapat memperbaharuinya setiap saat.</p>
-                                </div>
+                        </form>
+                        @if(flashMessages.has('notification'))
+                        <div class="alert alert-{{ flashMessages.get('status') }} " style="margin-top: 10px;" role="alert">
+                            {{ flashMessages.get('notification') }}
+                        </div>
+                        @end
+                        <div style="margin-top: 40px;">
+                            <div class="alert alert-info" role="alert">
+                                <h4 class="alert-heading">Atur akses tiap peran disini!</h4>
+                                <p>Akses tiap peran pada setiap menu atau fungsi yang ada akan ditentukan dari
+                                    perizinan
+                                    akses pada form ini.</p>
+                                <hr>
+                                <p class="mb-0">Anda dapat memperbaharuinya setiap saat.</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </form>
-    </div>
-</main>
+        </div>
+    </form>
+</div>
 @end
 @section('js')
 <script src="{{ env('BASEURL') }}jspage/roleHasPermission.js"></script>

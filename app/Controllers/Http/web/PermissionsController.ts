@@ -21,6 +21,11 @@ export default class PermissionsController {
         return view.render('webAdmin/pages/Permission/index', { permission: ['create', 'read', 'update', 'delete'], })
     }
 
+    public async create({ bouncer, view }: HttpContextContract) {
+        await bouncer.authorize("create-permission")
+        return view.render('webAdmin/pages/Permission/form', { act: 'create' })
+    }
+
     public async store({ bouncer, request, response, session }: HttpContextContract) {
         /*
         |--------------------------------------------------------------------------
